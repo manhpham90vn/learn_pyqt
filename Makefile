@@ -11,6 +11,29 @@ PY_FILES = $(patsubst $(UI_DIR)/%.ui, $(SRC_DIR)/%.py, $(UI_FILES))
 
 all: $(PY_FILES)
 
+init:
+	@if [ ! -d $(VENVDIR) ]; then \
+	    echo "Creating virtual environment..."; \
+	    python -m venv $(VENVDIR); \
+	else \
+	    echo "Virtual environment already exists."; \
+	fi
+
+install:
+	@echo "Installing dependencies..."
+	@$(VENVDIR)/bin/pip install -r requirements.txt
+
+freeze:
+	@echo "Freezing dependencies..."
+	@$(VENVDIR)/bin/pip freeze > requirements.txt
+
+design:
+	@if [ -f $(DESIGN_APP) ]; then \
+	    $(DESIGN_APP) designer;\
+	else \
+	    echo "Error: $(DESIGN_APP) not found."; \
+	fi
+
 $(SRC_DIR)/%.py: $(UI_DIR)/%.ui
 	@mkdir -p $(SRC_DIR)
 	@if [ "$@" == "$(SRC_DIR)/main.py" ]; then \
@@ -19,13 +42,6 @@ $(SRC_DIR)/%.py: $(UI_DIR)/%.ui
 	    $(PYUIC) $< -o $@; \
 	fi
 	@echo "Converted $< -> $@"
-
-design:
-	@if [ -f $(DESIGN_APP) ]; then \
-	    $(DESIGN_APP) designer;\
-	else \
-	    echo "Error: $(DESIGN_APP) not found."; \
-	fi
 
 run:
 	@if [ -f $(MAIN_SCRIPT) ]; then \

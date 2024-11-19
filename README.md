@@ -1,31 +1,37 @@
 # PyQT
 
+## Create venv
+
+```shell
+make init
+```
+
 ## Freeze
 
 ```shell
-pip freeze > requirements.txt
+make freeze
 ```
 
 ## Install
 
 ```shell
-pip install -r requirements.txt
+make install
 ```
 
 ## Start designer
 
 ```shell
-pyqt6-tools designer
+make design
 ```
 
 ## Convert UI to Python
 
 ```shell
-pyuic6 -o src/main.py -x ui/main.ui
+make
 ```
 
 ## Start project
 
 ```shell
-python src/main.py
+make run
 ```
