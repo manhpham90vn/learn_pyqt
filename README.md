@@ -12,10 +12,10 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 ```
 
-## Start ide
+## Start designer
 
 ```shell
-designer
+pyqt6-tools designer
 ```
 
 ## Convert UI to Python
