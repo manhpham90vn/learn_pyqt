@@ -1,9 +1,9 @@
 UI_DIR = ui
 SRC_DIR = src
-VENVDIR = venv
-PYUIC = $(VENVDIR)/bin/pyuic6
-PYTHON = $(VENVDIR)/bin/python
-DESIGN_APP = $(VENVDIR)/bin/pyqt6-tools
+VENV_DIR = venv
+PYUIC = $(VENV_DIR)/bin/pyuic6
+PYTHON = $(VENV_DIR)/bin/python
+TOOLS_APP = $(VENV_DIR)/bin/pyqt6-tools
 MAIN_SCRIPT = $(SRC_DIR)/main.py
 
 UI_FILES = $(wildcard $(UI_DIR)/*.ui)
@@ -12,40 +12,32 @@ PY_FILES = $(patsubst $(UI_DIR)/%.ui, $(SRC_DIR)/%.py, $(UI_FILES))
 all: $(PY_FILES)
 
 init:
-	@if [ ! -d $(VENVDIR) ]; then \
+	@if [ ! -d $(VENV_DIR) ]; then \
 	    echo "Creating virtual environment..."; \
-	    python -m venv $(VENVDIR); \
+	    python -m venv $(VENV_DIR); \
 	else \
 	    echo "Virtual environment already exists."; \
 	fi
 
 install:
 	@echo "Installing dependencies..."
-	@$(VENVDIR)/bin/pip install -r requirements.txt
+	@$(VENV_DIR)/bin/pip install -r requirements.txt
 
 freeze:
 	@echo "Freezing dependencies..."
-	@$(VENVDIR)/bin/pip freeze > requirements.txt
+	@$(VENV_DIR)/bin/pip freeze > requirements.txt
 
 design:
-	@if [ -f $(DESIGN_APP) ]; then \
-	    $(DESIGN_APP) designer;\
-	else \
-	    echo "Error: $(DESIGN_APP) not found."; \
-	fi
+	$(TOOLS_APP) designer
 
 $(SRC_DIR)/%.py: $(UI_DIR)/%.ui
 	@mkdir -p $(SRC_DIR)
-	@if [ "$@" == "$(SRC_DIR)/main.py" ]; then \
-	    $(PYUIC) -x $< -o $@; \
+	@if [ "$@" = "$(MAIN_SCRIPT)" ]; then \
+	    $(PYUIC) -x $< -o $@ || { echo "Failed to convert $<"; exit 1; }; \
 	else \
-	    $(PYUIC) $< -o $@; \
+	    $(PYUIC) $< -o $@ || { echo "Failed to convert $<"; exit 1; }; \
 	fi
 	@echo "Converted $< -> $@"
 
 run:
-	@if [ -f $(MAIN_SCRIPT) ]; then \
-	    $(PYTHON) $(MAIN_SCRIPT); \
-	else \
-	    echo "Error: $(MAIN_SCRIPT) not found."; \
-	fi
+	$(PYTHON) $(MAIN_SCRIPT);
