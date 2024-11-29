@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["Manh Pham <manhpham90vn@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyqt6 = "^6.7.1"
+
+[tool.poetry.scripts]
+app = "app.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
