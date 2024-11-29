@@ -5,12 +5,15 @@ description = ""
 authors = ["Manh Pham <manhpham90vn@icloud.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-pyqt6 = "^6.7.1"
-
 [tool.poetry.scripts]
 app = "app.main:main"
+
+[tool.poetry.dependencies]
+python = ">=3.13.0,<3.14"
+pyqt6 = "^6.7.1"
+
+[tool.poetry.group.dev.dependencies]
+pyinstaller = "^6.11.1"
 
 [build-system]
 requires = ["poetry-core"]
