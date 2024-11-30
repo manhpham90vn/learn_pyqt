@@ -11,9 +11,3 @@ poetry install
 ```shell
 poetry run app
 ```
-
-## Add new library
-
-```shell
-poetry add pyqt6
-```
