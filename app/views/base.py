@@ -13,5 +13,5 @@ class BaseView(QWidget):
             return os.getcwd()
 
     def setStyle(self, path):
-        with open(path, "r") as file:
+        with open(os.path.join(self.getPath(), path), "r") as file:
             self.setStyleSheet(file.read())

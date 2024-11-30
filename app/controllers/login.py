@@ -4,7 +4,7 @@ from app.controllers.base import BaseController
 
 class LoginController(BaseController):
     def __init__(self):
-        super().__init__(LoginView, 'app/assets/styles/login.css')
+        super().__init__(LoginView, 'assets/styles/login.css')
         self.view.button.clicked.connect(self.login)
 
     def login(self):

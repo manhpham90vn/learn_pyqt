@@ -11,7 +11,7 @@ class LoginView(BaseView):
 
         self.resize(400, 200)
         self.setWindowTitle("Login Form")
-        self.setWindowIcon(QIcon(os.path.join(self.getPath(), "app", "assets", "images", "icon.png")))
+        self.setWindowIcon(QIcon(os.path.join(self.getPath(), "assets", "images", "icon.png")))
         self.setContentsMargins(10, 10, 10, 10)
         
         layout = QGridLayout()
