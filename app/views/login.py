@@ -1,4 +1,7 @@
-from PyQt6.QtWidgets import QWidget, QPushButton, QLabel, QLineEdit, QVBoxLayout, QGridLayout, QSpacerItem, QSizePolicy
+from PyQt6.QtWidgets import ( QWidget, QPushButton, QLabel, QLineEdit, QMessageBox,
+                             QGridLayout, QSpacerItem, QSizePolicy, 
+                             QHBoxLayout, QGridLayout, QVBoxLayout
+                             )
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
 from app.views.base import BaseView
@@ -9,30 +12,43 @@ class LoginView(BaseView):
     def __init__(self):
         super().__init__()
 
-        self.resize(400, 200)
+        self.setFixedSize(500, 300)
         self.setWindowTitle("Login Form")
         self.setWindowIcon(QIcon(os.path.join(self.getPath(), "assets", "images", "icon.png")))
         self.setContentsMargins(10, 10, 10, 10)
         
-        layout = QGridLayout()
-        self.setLayout(layout)
+        vbox = QVBoxLayout()
+        self.setLayout(vbox)
 
+        hbox1 = QHBoxLayout()
         self.label1 = QLabel("Name:")
-        layout.addWidget(self.label1, 0, 0)
-
-        self.label2 = QLabel("Password:")
-        layout.addWidget(self.label2, 1, 0)
+        hbox1.addWidget(self.label1)
 
         self.input1 = QLineEdit()
-        layout.addWidget(self.input1, 0, 1)
+        self.input1.setFixedWidth(300)
+        self.input1.setPlaceholderText("Enter your name")
+        hbox1.addWidget(self.input1)
+
+        hbox2 = QHBoxLayout()
+        self.label2 = QLabel("Password:")
+        hbox2.addWidget(self.label2)
 
         self.input2 = QLineEdit()
+        self.input2.setFixedWidth(300)
+        self.input2.setPlaceholderText("Enter your password")
         self.input2.setEchoMode(QLineEdit.EchoMode.Password)
-        layout.addWidget(self.input2, 1, 1)
+        hbox2.addWidget(self.input2)
 
-        spacer = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-        layout.addItem(spacer, 2, 0, 1, 2)
+        vbox.addLayout(hbox1)
+        vbox.addLayout(hbox2)
 
         self.button = QPushButton("Login")
         self.button.setFixedWidth(150)
-        layout.addWidget(self.button, 3, 0, 1, 2, Qt.AlignmentFlag.AlignCenter)
+        vbox.addWidget(self.button, alignment=Qt.AlignmentFlag.AlignCenter)
+        
+    def showDialog(self, title, message):
+        msg = QMessageBox()
+        msg.setWindowTitle(title)
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setText(message)
+        msg.exec()
