@@ -10,7 +10,7 @@ class MainController(BaseController):
         
     def logout(self):
         settings = Configs().settings
-        settings.setValue('isLogin', False)
+        settings.setValue('isLogin', None)
         self.view.close()
         from app.controllers.login import LoginController
         self.loginController = LoginController()

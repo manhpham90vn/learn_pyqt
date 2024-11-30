@@ -7,9 +7,9 @@ from app.config import Configs
 def main():
     app = QApplication(sys.argv)
     settings = Configs().settings
-    isLogin = settings.value('isLogin')
-    
-    if isLogin == True:
+    isLogin = settings.value('isLogin')   
+     
+    if isLogin:
         main = MainController()
         main.show()
     else:
