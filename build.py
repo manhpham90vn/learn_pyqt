@@ -7,7 +7,10 @@ for folder in ["build", "dist"]:
         shutil.rmtree(folder)
         print(f"Deleted folder: {folder}")
     except FileNotFoundError:
-        print(f"Folder {folder} does not exist, skipping.")
+        print(f"Folder {folder} not found.")    
+    except Exception as e:
+        print(f"Error while deleting folder {folder}: {e}")
+        exit(1)
 
 # Run pyinstaller with poetry
 try:
