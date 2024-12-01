@@ -10,7 +10,7 @@ app = "app.main:main"
 
 [tool.poetry.dependencies]
 python = ">=3.13.0,<3.14"
-pyqt6 = "^6.7.1"
+pyside6 = "^6.8.0.2"
 
 [tool.poetry.group.dev.dependencies]
 pyinstaller = "^6.11.1"

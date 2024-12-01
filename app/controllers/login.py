@@ -1,6 +1,7 @@
-from app.views.login import LoginView
 from app.config import Configs
 from app.controllers.base import BaseController
+from app.views.login import LoginView
+
 
 class LoginController(BaseController):
     def __init__(self):
@@ -11,7 +12,7 @@ class LoginController(BaseController):
     def login(self):
         name = self.view.input1.text()
         password = self.view.input2.text()
-        
+
         if name == 'admin' and password == 'admin':
             self.view.showDialog('Success', 'Login successful')
             settings = Configs().settings

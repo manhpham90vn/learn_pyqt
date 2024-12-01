@@ -1,8 +1,8 @@
-from PyQt6.QtWidgets import QWidget, QPushButton, QLabel, QLineEdit, QVBoxLayout, QGridLayout
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
 import os
 import sys
+
+from PySide6.QtWidgets import QWidget
+
 
 class BaseView(QWidget):
 

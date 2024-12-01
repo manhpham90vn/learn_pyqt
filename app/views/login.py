@@ -1,12 +1,12 @@
-from PyQt6.QtWidgets import ( QWidget, QPushButton, QLabel, QLineEdit, QMessageBox,
-                             QGridLayout, QSpacerItem, QSizePolicy, 
-                             QHBoxLayout, QGridLayout, QVBoxLayout
-                             )
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
-from app.views.base import BaseView
 import os
-import sys
+
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QMessageBox,
+                               QPushButton, QVBoxLayout)
+
+from app.views.base import BaseView
+
 
 class LoginView(BaseView):
     def __init__(self):
@@ -14,9 +14,10 @@ class LoginView(BaseView):
 
         self.setFixedSize(500, 300)
         self.setWindowTitle("Login Form")
-        self.setWindowIcon(QIcon(os.path.join(self.getPath(), "assets", "images", "icon.png")))
+        self.setWindowIcon(
+            QIcon(os.path.join(self.getPath(), "assets", "images", "icon.png")))
         self.setContentsMargins(10, 10, 10, 10)
-        
+
         vbox = QVBoxLayout()
         self.setLayout(vbox)
 
@@ -45,7 +46,7 @@ class LoginView(BaseView):
         self.button = QPushButton("Login")
         self.button.setFixedWidth(150)
         vbox.addWidget(self.button, alignment=Qt.AlignmentFlag.AlignCenter)
-        
+
     def showDialog(self, title, message):
         msg = QMessageBox()
         msg.setWindowTitle(title)
